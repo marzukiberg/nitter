@@ -2,42 +2,49 @@
 @import "_mixins";
 
 button {
-  @include input-colors;
-  background-color: var(--bg_elements);
-  color: var(--fg_color);
-  border: 1px solid var(--accent_border);
-  padding: 3px 6px;
+  background-color: #eff3f4;
+  color: #0f1419;
+  font-weight: 700;
+  border: none;
+  border-radius: 9999px;
+  padding: 8px 18px;
   font-size: 14px;
   cursor: pointer;
-  float: right;
+  transition: background-color 0.2s ease, opacity 0.2s ease;
+
+  &:hover {
+    background-color: #d7dbdc;
+  }
 }
 
 input[type="text"],
 input[type="date"],
 input[type="number"],
 select {
-  @include input-colors;
-  background-color: var(--bg_elements);
-  padding: 1px 4px;
-  color: var(--fg_color);
-  border: 1px solid var(--accent_border);
-  border-radius: 0;
+  background-color: #16181c;
+  padding: 8px 14px;
+  color: #e7e9ea;
+  border: 1px solid #2f3336;
+  border-radius: 9999px;
   font-size: 14px;
-}
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 
-input[type="number"] {
-  -moz-appearance: textfield;
-}
-
-input[type="text"],
-input[type="number"] {
-  height: 16px;
+  &:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 1px var(--accent);
+    background-color: #000000;
+  }
 }
 
 select {
-  height: 20px;
-  padding: 0 2px;
-  line-height: 1;
+  border-radius: 8px;
+  padding: 4px 8px;
+}
+
+input[type="date"] {
+  color-scheme: dark;
+  cursor: pointer;
+  font-family: inherit;
 }
 
 input[type="date"]::-webkit-inner-spin-button {
@@ -56,21 +63,28 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 
 input[type="date"]::-webkit-clear-button {
-  margin-left: 17px;
-  filter: grayscale(100%);
-  filter: hue-rotate(120deg);
+  display: none;
 }
 
 input::-webkit-calendar-picker-indicator {
   opacity: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
 }
 
 input::-webkit-datetime-edit-day-field:focus,
 input::-webkit-datetime-edit-month-field:focus,
 input::-webkit-datetime-edit-year-field:focus {
   background-color: var(--accent);
-  color: var(--fg_color);
+  color: #ffffff;
   outline: none;
+  border-radius: 2px;
 }
 
 .date-range {

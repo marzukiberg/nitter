@@ -19,14 +19,22 @@ const toggles = {
 }.toOrderedTable
 
 proc renderSearch*(): VNode =
-  buildHtml(tdiv(class="panel-container")):
-    tdiv(class="search-bar"):
+  buildHtml(tdiv(class="panel-container home-hero")):
+    tdiv(class="home-brand-header"):
+      img(class="home-brand-logo", src="/logo.png", alt="Nitter Logo")
+      h1(class="home-brand-title"): text "nitter"
+      p(class="home-brand-subtitle"): text "A lightweight, privacy-friendly front-end for X"
+
+    tdiv(class="search-bar modern-search"):
       form(`method`="get", action="/search", autocomplete="off"):
         hiddenField("f", "tweets")
-        input(`type`="text", name="q", autofocus="",
-              placeholder="Search...", dir="auto")
-        button(`type`="submit"): icon "search"
-
+        tdiv(class="search-input-wrapper"):
+          span(class="search-icon-prefix"):
+            icon "search"
+          input(`type`="text", name="q", autofocus="",
+                placeholder="Search X / Explore users, tweets, hashtags...", dir="auto")
+          button(`type`="submit", class="search-submit-btn"):
+            text "Search"
 proc renderProfileTabs*(query: Query; username: string): VNode =
   let link = "/" & username
   buildHtml(ul(class="tab")):

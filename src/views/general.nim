@@ -23,19 +23,17 @@ proc renderNavbar(cfg: Config; req: Request; rss, canonical: string): VNode =
   buildHtml(nav):
     tdiv(class="inner-nav"):
       tdiv(class="nav-item"):
-        a(class="site-name", href="/"): text cfg.title
-
-      a(href="/"): img(class="site-logo", src="/logo.png", alt="Logo")
+        a(href="/", class="brand-badge"):
+          img(class="site-logo", src="/logo.png", alt="Logo")
+          span(class="site-name"): text cfg.title
 
       tdiv(class="nav-item right"):
         icon "search", title="Search", href="/search"
         if rss.len > 0:
           icon "rss", title="RSS Feed", href=rss
         icon "bird", title="Open in X", href=canonical
-        a(href="https://liberapay.com/zedeus"): verbatim lp
         icon "info", title="About", href="/about"
         icon "cog", title="Preferences", href=("/settings?referer=" & encodeUrl(path))
-
 proc renderHead*(prefs: Prefs; cfg: Config; req: Request; titleText=""; desc="";
                  video=""; images: seq[string] = @[]; banner=""; ogTitle="";
                  rss=""; alternate=""; oembed=""): VNode =
@@ -81,6 +79,7 @@ proc renderHead*(prefs: Prefs; cfg: Config; req: Request; titleText=""; desc="";
     if prefs.infiniteScroll:
       script(src="/js/infiniteScroll.js", `defer`="")
 
+    script(src="/js/spa.js", `defer`="")
     title:
       if titleText.len > 0:
         text titleText & " | " & cfg.title
